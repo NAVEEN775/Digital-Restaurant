@@ -1,0 +1,70 @@
+<div class="form edit-book-form">
+  <form #formDir="ngForm" [formGroup]="editBookForm" (ngSubmit)="onSubmit()">
+    <h1>Edit Item</h1>
+    <div class="form-field">
+      <input type="text" class="title" name="title" placeholder="Book Title" formControlName="title" />
+      <i class="fas fa-book" aria-hidden="true"></i>
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="input-error">
+        <div *ngIf="title.errors.required">
+          Item   title is required
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <input type="text" class="author" name="author" placeholder="Chef Name" formControlName="author" />
+      <i class="fas fa-user" aria-hidden="true"></i>
+      <div *ngIf="author.invalid && (author.dirty || author.touched)" class="input-error">
+        <div *ngIf="author.errors.required">
+          Chef Name is required
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <textarea class="description" name="description" placeholder="Item description" formControlName="description" cols="30" rows="10"></textarea>
+      <i class="fas fa-pen" aria-hidden="true"></i>
+      <div *ngIf="description.invalid && (description.dirty || description.touched)" class="input-error">
+        <div *ngIf="description.errors.required || description.errors.minlength ">
+          Item description must be more than 10 symbols long
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <input type="url" class="cover" name="cover" placeholder="Item Cover" formControlName="cover" />
+      <i class="fas fa-book-open" aria-hidden="true"></i>
+      <div *ngIf="cover.invalid && (cover.dirty || cover.touched)" class="input-error">
+        <div *ngIf="cover.errors.required">
+          Item  cover is required
+        </div>
+        <div *ngIf="!cover.errors.isUrl">
+          Item cover must be a valid Url
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <input type="number" class="pagesCount" name="pagesCount" placeholder="Item Quantity" formControlName="pagesCount" step="1"
+      />
+      <i class="fas fa-file-alt" aria-hidden="true"></i>
+      <div *ngIf="pagesCount.invalid && (pagesCount.dirty || pagesCount.touched)" class="input-error">
+        <div *ngIf="pagesCount.errors.required">
+          Item Quantity count is required
+        </div>
+        <div *ngIf="pagesCount.errors.min">
+          Item Quantity count must be positive number
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <input type="number" class="price" name="price" placeholder="Item Price" formControlName="price" step="0.1" />
+      <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+      <div *ngIf="price.invalid && (price.dirty || price.touched)" class="input-error">
+        <div *ngIf="price.errors.required">
+          Item price is required
+        </div>
+        <div *ngIf="price.errors.min">
+          Price must be positive number
+        </div>
+      </div>
+    </div>
+    <input type="submit" class="submit" value="Submit Item" [disabled]="editBookForm.invalid" />
+  </form>
+</div>
